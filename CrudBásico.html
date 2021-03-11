@@ -1,0 +1,149 @@
+<body>
+    <center>
+        <h1 style="background-color: black;"><span style="color: white;">Cadastro Pessoal de Motoristas</span></h1>
+    </center>
+    <br>
+    <center>
+        <h1>Cadastrar</h1>
+    </center>
+    <form onsubmit="Consulta()">
+        <label for="nome"></label>
+        <input type="text" id="nome" class="form-control col-6 offset-3"
+            placeholder="Modelo do carro, Nome, Comentários etc...">
+
+        <label for="identificacao"></label>
+        <input type="text" id="identificacao" class="form-control col-6 offset-3" placeholder="Número">
+        <br>
+        <button type="button" onclick="salvar()" class="btn btn-success btn-lg offset-3">Salvar</button>
+        <br><br>
+
+        <center>
+            <h1>Consultar </h1>
+        </center><br><br>
+        <input type="text" id="consulta" class="form-control col-6 offset-3"
+            placeholder="Insira um número para consulta">
+        <br>
+        <button type="button" onclick="Consulta()" class="btn btn-lg btn-success offset-3">Consultar</button>
+        <br><br>
+        <center>
+            <h3 id="ler"></h3>
+        </center>
+        <br><br>
+
+        <center>
+            <h1>Remover</h1>
+        </center>
+        <label for="remove"></label>
+        <input type="text" id="remove" class="form-control col-6 offset-3" placeholder="Insira um número para remoção">
+        <br>
+        <button type="button" onclick="remover()" class="btn btn-danger btn-lg offset-3 ">Remover
+            Motorista</button><br><br>
+
+        <button type="button" onclick="consultar()" class="btn1 btn-dark btn-lg  col-12">Carregar lista</button><br><br>
+
+        <button type="button" onclick="apagar()" class="btn btn-danger btn-lg col-12">Apagar Consulta</button><br><br>
+    </form>
+    <br><br>
+
+    <h3 id="ler1"></h3>
+    <br><br>
+    <center>
+        <h3 id="ler2"></h3>
+    </center>
+    <h3 id="ler3" class="p-1"></h3>
+    <script>
+        function salvar() {
+            restrição = 11;
+            value = $('#nome').val();
+            key = $('#identificacao').val();
+
+            localStorage.setItem(key, value);
+
+            if ($('#nome').val() == "" || ($('#identificacao').val() == "")) {
+                alert("preencher os campos");
+                localStorage.removeItem(key);
+                return $('#nome').focus();
+            }
+            // $('#ler2').text("Salvo").show();
+            alert("Salvo com sucesso")
+            window.location.reload();
+        }
+
+        function Consulta() {
+            key = $("#consulta").val();
+            value = $("#consulta").val();
+
+            valor_consulta = localStorage.getItem(key);
+
+            $('#ler').text(" Número " + value + "\n" + valor_consulta);
+        }
+
+        function apagar() {
+            window.location.reload();
+
+        }
+
+        function consultar() {
+            for (i = 0; i < localStorage.length; i++) {
+                key = localStorage.key(i);
+                value = localStorage.getItem(key);
+                document.getElementById("ler3").innerHTML += key + "  " + value + "<hr>";
+
+            }
+        }
+        function remover() {
+            remove = document.getElementById('remove').value;
+            if (remove == "") {
+                alert("Insira um número para remoção");
+                return remove.focus();
+            }
+
+            localStorage.removeItem(remove);
+            // $('#ler2').text('Removido com sucesso').show();
+            alert("Removido com sucesso");
+            window.location.reload();
+
+        }
+        $(function () {
+            $('#remove').click(function () {
+                if (localStorage.length > 0) {
+                    // alert("Há item na lista");
+
+                } else {
+
+                    alert("Sem itens na lista");
+
+                }
+
+            });
+        });
+        $(function () {
+            $('.btn1').click(function () {
+                if (localStorage.length > 0) {
+                    // alert("Há item na lista");
+
+                } else {
+
+                    alert("Sem itens na lista");
+
+                }
+
+            });
+        });
+
+        $(function () {
+            $('#consulta').click(function () {
+                if (localStorage.length > 0) {
+                    // alert("Há item na lista");
+
+                } else {
+
+                    alert("Sem itens na lista");
+
+                }
+            });
+        });
+
+
+    </script>
+</body>
