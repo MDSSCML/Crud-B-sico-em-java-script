@@ -1,5 +1,5 @@
 # Crud Básico Guardando localmente
-## Necessita
+## Para funcionamento correto necessita
 * Bootstrap
 * Java script
 * Jquery
